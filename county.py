@@ -1,6 +1,3 @@
-# from https://medium.com/swlh/making-maps-in-python-8dcb6d4d4451
-# 'Making Maps in Python: Using Plotly to Create Choropleth Visualizations' by Jim Fay
-
 import pandas as pd
 import numpy as np
 
