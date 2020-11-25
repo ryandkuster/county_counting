@@ -19,6 +19,8 @@ def parse_user_input():
         help='the full or relative path to the census population data')
     parser.add_argument('-frame', type=str, required=False, metavar='',
         help='include only dates ending in this number')
+    parser.add_argument('-start', type=str, required=False, metavar='',
+        help='include only dates starting after this date')
     parser.add_argument('-state', type=str, required=False, metavar='',
         help='include only this state')
 
@@ -117,6 +119,12 @@ def define_frames(df, frame):
     return frames_df
 
 
+def limit_dates(df, start):
+    dates_df = df.loc[df['date'] >= start]
+    print(dates_df)
+    return dates_df
+
+
 def check_variable_spread():
     # optional, better for EDA
 
@@ -142,6 +150,8 @@ if __name__ == '__main__':
 
     counties = get_county_json()
     print(df)
+    if args.start:
+        df = limit_dates(df, args.start)
     if args.frame:
         df = define_frames(df, args.frame)
     figure_var = 'per_1k_cases'
